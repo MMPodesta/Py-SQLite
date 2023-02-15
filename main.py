@@ -1,4 +1,5 @@
 import sqlite3
+import matplotlib.pyplot as plt
 
 connection = sqlite3.connect("gta.db")  # database name
 cursor = connection.cursor()  # does all comm with database
@@ -48,5 +49,22 @@ for i in search_all_cities:
     # change for "new york" if value is "Liberty City"
     adjusted = [cities_search[0][1] if value == cities_search[0][0] else value for value in i]
     print(adjusted)
+
+# data visualization with matplotlib
+cursor.execute("SELECT release_year, release_name FROM gta")
+year_name = cursor.fetchall()
+years = []
+names = []
+
+# for each tuple element "row"
+for i in year_name:
+    years.append(i[0])  # append column 1 to years list
+    names.append(i[1])  # append column 2 to name list
+
+plt.plot(names, years)
+plt.xlabel("Game")
+plt.ylabel("Release year")
+plt.title("GTA release graph")
+plt.show()
 
 connection.close()
