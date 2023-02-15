@@ -16,4 +16,7 @@ release_list = [
     (2013, "Grand Theft Auto V", "Los Santos")
 ]
 
+# ? => place holder for values to be insert
+cursor.executemany("insert into gta values (?,?,?)", release_list)
+
 connection.close()
