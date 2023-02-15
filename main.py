@@ -16,8 +16,8 @@ release_list = [
     (2013, "Grand Theft Auto V", "Los Santos")
 ]
 
-# ? => place holder for values to be insert
-cursor.executemany("insert into gta values (?,?,?)", release_list)
+# create first table
+cursor.executemany("insert into gta values (?,?,?)", release_list)  # ? => place holder for values to be insert
 
 # print database rows
 for row in cursor.execute("select * from gta"):
@@ -25,13 +25,21 @@ for row in cursor.execute("select * from gta"):
 
 # print specific rows
 print("**********************************************")
-print(cursor.execute('select * from gta where city="Liberty City"').fetchall())
+cursor.execute('select * from gta where city="Liberty City"')
+gta_search = cursor.fetchall()
+print(gta_search)
 
 # create second table
 print("**********************************************")
 cursor.execute("create table cities (gta_city text, real_city text)")
 cursor.execute("insert into cities values (?,?)", ("Liberty City", "New York"))
+
 # fetch specific row
-print(cursor.execute('select * from cities where gta_city="Liberty City"').fetchall())
+cursor.execute('select * from cities where gta_city="Liberty City"')
+cities_search = cursor.fetchall()
+print(cities_search)
+
+print("**********************************************")
+
 
 connection.close()
