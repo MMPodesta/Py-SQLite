@@ -27,5 +27,11 @@ for row in cursor.execute("select * from gta"):
 print("**********************************************")
 print(cursor.execute('select * from gta where city="Liberty City"').fetchall())
 
+# create second table
+print("**********************************************")
+cursor.execute("create table cities (gta_city text, real_city text)")
+cursor.execute("insert into cities values (?,?)", ("Liberty City", "New York"))
+# fetch specific row
+print(cursor.execute('select * from cities where gta_city="Liberty City"').fetchall())
 
 connection.close()
