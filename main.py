@@ -19,9 +19,12 @@ release_list = [
 # create first table
 cursor.executemany("insert into gta values (?,?,?)", release_list)  # ? => place holder for values to be insert
 
-# print database rows
+# print all database rows
 for row in cursor.execute("select * from gta"):
     print(row)
+
+cursor.execute("select * from gta")
+search_all_cities = cursor.fetchall()
 
 # print specific rows
 print("**********************************************")
@@ -40,6 +43,10 @@ cities_search = cursor.fetchall()
 print(cities_search)
 
 print("**********************************************")
-
+# adjust retrieved values
+for i in search_all_cities:
+    # change for "new york" if value is "Liberty City"
+    adjusted = [cities_search[0][1] if value == cities_search[0][0] else value for value in i]
+    print(adjusted)
 
 connection.close()
