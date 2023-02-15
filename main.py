@@ -1,16 +1,16 @@
-# This is a sample Python script.
+import sqlite3
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# database name
+connection = sqlite3.connect("gta.db")
 
+release_list = [
+    (1997, "Grand Theft Auto", "state of New Guernsey"),
+    (1999, "Grand Theft Auto 2", "Anywhere, USA"),
+    (2001, "Grand Theft Auto III", "Liberty City"),
+    (2002, "Grand Theft Auto: Vice City", "Vice City"),
+    (2004, "Grand Theft Auto: San Andreas", "state of San Andreas"),
+    (2008, "Grand Theft Auto IV", "Liberty City"),
+    (2013, "Grand Theft Auto V", "Los Santos")
+]
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+connection.close()
