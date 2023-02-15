@@ -67,4 +67,40 @@ plt.ylabel("Release year")
 plt.title("GTA release graph")
 plt.show()
 
+# alter table gta and make a new graph based on sales
+cursor.execute("ALTER TABLE gta ADD sales INTEGER")  # add new column
+query = "UPDATE gta SET sales = ? WHERE release_year = ?"  # prepare update query
+cursor.execute("SELECT release_year FROM gta")  # get all years, (use them to distinguish each game)
+rows = cursor.fetchall()
+values = [3, 2, 14, 17, 21, 25, 140]  # Sales in Millions of copies
+i = 0
+# for each row execute the update query, adding sales of each game
+for row in rows:
+    cursor.execute(query, (values[i], row[0]))
+    i += 1
+
+# plot graph
+# prepare lists to plot
+left_coordinates = []
+bar_labels = []
+heights = []
+
+# get all names and respective sales
+cursor.execute("SELECT release_name, sales FROM gta")
+rows = cursor.fetchall()
+i = 1
+
+# for each row, add its game name and sales to list
+for row in rows:
+    left_coordinates.append(i)
+    bar_labels.append(row[0])
+    heights.append(row[1])
+    i += 1
+
+plt.bar(left_coordinates, heights, tick_label=bar_labels, width=0.4, color=['red', 'black'])
+plt.xlabel('Games')
+plt.ylabel('Sales - Millions of copies')
+plt.title("GTA bar graph")
+plt.show()
+
 connection.close()
