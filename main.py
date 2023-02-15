@@ -19,4 +19,8 @@ release_list = [
 # ? => place holder for values to be insert
 cursor.executemany("insert into gta values (?,?,?)", release_list)
 
+#print database rows
+for row in cursor.execute("select * from gta"):
+    print(row)
+
 connection.close()
