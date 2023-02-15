@@ -19,8 +19,13 @@ release_list = [
 # ? => place holder for values to be insert
 cursor.executemany("insert into gta values (?,?,?)", release_list)
 
-#print database rows
+# print database rows
 for row in cursor.execute("select * from gta"):
     print(row)
+
+# print specific rows
+print("**********************************************")
+print(cursor.execute('select * from gta where city="Liberty City"').fetchall())
+
 
 connection.close()
