@@ -1,7 +1,10 @@
 import sqlite3
 
-# database name
-connection = sqlite3.connect("gta.db")
+connection = sqlite3.connect("gta.db")  # database name
+cursor = connection.cursor()  # does all comm with database
+
+# creates table with each datatype
+cursor.execute("create table gta (release_year integer, release_name text, city text)")
 
 release_list = [
     (1997, "Grand Theft Auto", "state of New Guernsey"),
